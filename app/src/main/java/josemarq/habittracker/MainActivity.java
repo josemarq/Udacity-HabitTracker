@@ -2,6 +2,7 @@ package josemarq.habittracker;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(HabitsContract.HabitsEntry.habitObservations, "Text Sample");
         habitsDBHelper.insertRecord(contentValues);
 
-        // Update the record
+        // Update the record Id 1
         contentValues.put(HabitsContract.HabitsEntry.habitCounter, 100);
         habitsDBHelper.updateRecord(1, contentValues);
 
-        // Get the record
-        Cursor habitRecord = habitsDBHelper.getRow(1);
+        // Get the record Id 1
+        Cursor habitRecord = habitsDBHelper.getRow(1);;
         Log.i("getRecord ", habitRecord.toString());
 
         // Delete the record
@@ -42,26 +43,6 @@ public class MainActivity extends AppCompatActivity {
         // Delete the database
         habitsDBHelper.dropDB(this);
 
-
     }
 
-    //BUTTONS FOR CREATE EXAMPLES RECORDS AND DROP TABLE
-    public void onClickBtnDrop(View v)
-    {
-        Toast.makeText(this, "Drop DB", Toast.LENGTH_LONG).show();
-        HabitsDBHelper habitsDBHelper = new HabitsDBHelper(this);
-        habitsDBHelper.dropDB(this);
-    }
-    public void onClickBtnInsert(View v)
-    {
-        Toast.makeText(this, "Insert new record DB", Toast.LENGTH_LONG).show();
-        HabitsDBHelper habitsDBHelper = new HabitsDBHelper(this);
-
-        // Create a new record with button
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(HabitsContract.HabitsEntry.habitName, "Spinning");
-        contentValues.put(HabitsContract.HabitsEntry.habitCounter, 1);
-        contentValues.put(HabitsContract.HabitsEntry.habitObservations, "Sample with Button");
-        habitsDBHelper.insertRecord(contentValues);
-    }
 }
